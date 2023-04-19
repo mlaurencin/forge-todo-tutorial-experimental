@@ -1,8 +1,8 @@
 # forge-todo-tutorial-experimental
 
-# (EXPERIMENTAL) Forge Todo Tutorial
+# (EXPERIMENTAL) Forge To-Do Tutorial
 
-A small todo list desktop application that automatically saves changes as you add to the list.
+A small to-do list desktop application that automatically saves changes as you add to the list.
 
 Built using Electron and React and [Electron Forge](https://www.electronforge.io/).
 
