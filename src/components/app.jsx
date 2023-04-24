@@ -17,12 +17,12 @@ let entries = [
 let entries = [];
 let hasLoadedData = false;
 
-function ToDoItem({label, onRemoveClick}){
+function ToDoItem({id, label, onRemoveClick}){
     return(
         <ListGroup.Item as="li">
             <Form.Check
                 type="checkbox"
-                id="default-checkbox">
+                id={`default-checkbox-${id}`}>
                 <Form.Check.Input type="checkbox"/>
                 <Form.Check.Label>{label}</Form.Check.Label>
                 <CloseButton className="item-x" aria-label="Delete" onClick={onRemoveClick}/>
@@ -45,7 +45,7 @@ function ToDoList({input}){
         let rows = [];
         entryList.forEach((r) => {
             rows.push(
-                <ToDoItem key={r.id} label={r.label} onRemoveClick={(evt) => {Remove(evt, r.id);}} />
+                <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={(evt) => {Remove(evt, r.id);}} />
             )
         });
         return rows;
