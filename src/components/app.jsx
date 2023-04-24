@@ -45,7 +45,7 @@ function ToDoList({input}){
         let rows = [];
         entryList.forEach((r) => {
             rows.push(
-                <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={(evt) => {Remove(evt, r.id);}} />
+                <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={() => {Remove(r.id);}} />
             )
         });
         return rows;
@@ -58,14 +58,14 @@ function ToDoList({input}){
         window.todo.saveContent(newValue);
     }
 
-    function Remove(evt, id){
+    function Remove(id){
         const updated = entries.filter(item => item.id != id);
         entries = updated;
         updateTodo(JSON.stringify(entries));
         setValuesList(entries);
     }
 
-    function Add(evt, label){
+    function Add(label){
         entries.push({id: crypto.randomUUID(), label: label});
         updateTodo(JSON.stringify(entries));
         setValuesList(entries);
@@ -80,7 +80,7 @@ function ToDoList({input}){
 
     function onFormSubmit(evt) {
         if (text !== ''){
-            Add(evt, text)
+            Add(text);
         }
         evt.preventDefault();
         setText('');
