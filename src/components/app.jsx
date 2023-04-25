@@ -41,7 +41,7 @@ function ToDoList({input}){
     }
 
     //Convert to JSX element 
-    function EntriesToListItems(entryList){
+    function EntriesToListItems({entryList}){
         return entryList.map((r) => (
             <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={() => {Remove(r.id);}} />
         ));
@@ -85,7 +85,7 @@ function ToDoList({input}){
     return(
         <Form onSubmit={onFormSubmit}>
             <ListGroup as="ul">
-                {EntriesToListItems(values)}
+                <EntriesToListItems entryList={values} />
             </ListGroup>
             <Form.Group className="mb-3" controlId="myId">
             <Form.Control 
