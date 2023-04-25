@@ -14,8 +14,6 @@ valuesList = [
 ];
 */
 
-let hasLoadedData = false;
-
 function ToDoItem({id, label, onRemoveClick}){
     return(
         <ListGroup.Item as="li">
@@ -34,7 +32,7 @@ function ToDoList({input}){
     //Convert to JSX element 
     function EntriesToListItems({entryList}){
         return entryList.map((r) => (
-            <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={() => {Remove(r.id);}} />
+            <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={() => {remove(r.id);}} />
         ));
     }
 
@@ -47,17 +45,23 @@ function ToDoList({input}){
         window.todo.saveContent(newValue);
     }
 
-    function Remove(id){
-        const updated = valuesList.filter(item => item.id != id);
-        updateTodo(JSON.stringify(updated));
-        setValuesList(updated);
+    function remove(id){
+        setValuesList(currentValues => {
+            const updatedValues = currentValues.filter(item => item.id != id);
+            updateTodo(JSON.stringify(updatedValues));
+
+            return updatedValues;
+        });
     }
 
-    function Add(label){
-        const updated = valuesList.slice(0);
-        updated.push({id: crypto.randomUUID(), label: label});
-        updateTodo(JSON.stringify(updated));
-        setValuesList(updated);
+    function add(label){
+        setValuesList(currentValues => {
+            const updatedValues = valuesList.slice(0);
+            updatedValues.push({id: crypto.randomUUID(), label: label});
+            updateTodo(JSON.stringify(updatedValues));
+
+            return updatedValues;
+        });
     }
 
     //Variable that will track the text in the input text field
@@ -69,7 +73,7 @@ function ToDoList({input}){
 
     function onFormSubmit(evt) {
         if (text !== ''){
-            Add(text);
+            add(text);
         }
         evt.preventDefault();
         setText('');
