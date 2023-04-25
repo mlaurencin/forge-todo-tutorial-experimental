@@ -31,14 +31,6 @@ function ToDoItem({id, label, onRemoveClick}){
 }
 
 function ToDoList({input}){
-    //Load any saved data
-    if (!hasLoadedData){
-        if (input !== undefined && input.length != 0){
-            entries = JSON.parse(input);
-        }
-        hasLoadedData = true;
-    }
-
     //Convert to JSX element 
     function EntriesToListItems({entryList}){
         return entryList.map((r) => (
@@ -47,7 +39,9 @@ function ToDoList({input}){
     }
 
     //Variable that will track the info to form the list
-    const [valuesList, setValuesList] = useState([]);
+    //Load any saved data when initializing
+    console.log(input);
+    const [valuesList, setValuesList] = useState((input === '') ? [] : JSON.parse(input));
 
     function updateTodo(newValue){
         window.todo.saveContent(newValue);
