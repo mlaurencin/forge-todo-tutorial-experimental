@@ -4,8 +4,8 @@ import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CloseButton from 'react-bootstrap/CloseButton';
 
-/* Example entries
-let entries = [
+/* Structure of valuesList
+valuesList = [
     {id:1, label: "Cras justo odio"},
     {id:2,label: "Dapibus ac facilisis in"},
     {id:3,label: "Morbi leo risus"},
@@ -14,7 +14,6 @@ let entries = [
 ];
 */
 
-let entries = [];
 let hasLoadedData = false;
 
 function ToDoItem({id, label, onRemoveClick}){
@@ -48,23 +47,23 @@ function ToDoList({input}){
     }
 
     //Variable that will track the info to form the list
-    const [values, setValuesList] = useState(entries);
+    const [valuesList, setValuesList] = useState([]);
 
     function updateTodo(newValue){
         window.todo.saveContent(newValue);
     }
 
     function Remove(id){
-        const updated = entries.filter(item => item.id != id);
-        entries = updated;
-        updateTodo(JSON.stringify(entries));
-        setValuesList(entries);
+        const updated = valuesList.filter(item => item.id != id);
+        updateTodo(JSON.stringify(updated));
+        setValuesList(updated);
     }
 
     function Add(label){
-        entries.push({id: crypto.randomUUID(), label: label});
-        updateTodo(JSON.stringify(entries));
-        setValuesList(entries);
+        const updated = valuesList.slice(0);
+        updated.push({id: crypto.randomUUID(), label: label});
+        updateTodo(JSON.stringify(updated));
+        setValuesList(updated);
     }
 
     //Variable that will track the text in the input text field
@@ -85,7 +84,7 @@ function ToDoList({input}){
     return(
         <Form onSubmit={onFormSubmit}>
             <ListGroup as="ul">
-                <EntriesToListItems entryList={values} />
+                <EntriesToListItems entryList={valuesList} />
             </ListGroup>
             <Form.Group className="mb-3" controlId="myId">
             <Form.Control 
