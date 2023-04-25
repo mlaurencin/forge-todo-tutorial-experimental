@@ -1,6 +1,6 @@
 {
-  "name": "my-todo-local-test",
-  "productName": "my-todo-local-test",
+  "name": "forge-todo-tutorial-experimental",
+  "productName": "forge-todo-tutorial-experimental",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
