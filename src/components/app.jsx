@@ -42,13 +42,9 @@ function ToDoList({input}){
 
     //Convert to JSX element 
     function EntriesToListItems(entryList){
-        let rows = [];
-        entryList.forEach((r) => {
-            rows.push(
-                <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={() => {Remove(r.id);}} />
-            )
-        });
-        return rows;
+        return entryList.map((r) => (
+            <ToDoItem key={r.id} id={r.id} label={r.label} onRemoveClick={() => {Remove(r.id);}} />
+        ));
     }
 
     //Variable that will track the info to form the list
